@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics.Tracing;
 
-namespace GeekyTool
+namespace GeekyLog.Base
 {
-    internal sealed class BaseEventSource : EventSource
+    sealed class BaseEventSource : EventSource
     {
         public static BaseEventSource Log = new BaseEventSource();
 
