@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package>
+  <metadata>
+    <id>GeekyLog</id>
+    <version>$version$</version>
+    <authors>Dachi Gogotchuri</authors>
+    <title>GeekyLog</title>
+    <description>A simple, toolkit agnostic logger component from GeekyTool suite</description>
+    <language>en-US</language>
+    <projectUrl>https://github.com/dachibox/GeekyLog</projectUrl>
+    <licenseUrl>https://github.com/dachibox/GeekyLog/blob/master/LICENSE</licenseUrl>
+    <iconUrl>https://raw.githubusercontent.com/dachibox/GeekyTool/master/assets/GeekyTool.png</iconUrl>
+    <copyright>Copyright 2016 Dachi Gogotchuri</copyright>
+    <dependencies>
+      <group>
+        <dependency id="GeekyTool" version="$version$" />
+      </group>
+      <group targetFramework="uap10.0">
+        <dependency id="GeekyTool.Core" version="$version$" />
+      </group>
+    </dependencies>
+    <tags>GeekyLog, MVVM, Toolkit, EventListener, Portable</tags>
+  </metadata>
+</package>
