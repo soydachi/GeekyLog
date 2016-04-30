@@ -1,6 +1,12 @@
-﻿namespace GeekyLogViewer.ViewModels
+﻿using GeekyTool.Base;
+
+namespace GeekyLogViewer.ViewModels
 {
-    public class MainViewModel
+    public class MainViewModel : UwpBaseViewModel
     {
+        public MainViewModel()
+        {
+            
+        }
     }
 }
