@@ -1,6 +1,14 @@
-﻿namespace SampleUwp.ViewModels
+﻿using GeekyTool.Base;
+
+namespace SampleUwp.ViewModels
 {
-    public class MainViewModel
+    public class MainViewModel : UwpBaseViewModel
     {
+        public MainViewModel()
+        {
+            
+        }
+
+
     }
 }

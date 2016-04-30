@@ -1,6 +1,9 @@
 ﻿{
   "dependencies": {
-    "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0"
+    "Autofac": "3.5.2",
+    "GeekyTool": "1.0.60",
+    "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
+    "Newtonsoft.Json": "8.0.3"
   },
   "frameworks": {
     "uap10.0": {}

@@ -2,7 +2,13 @@
     x:Class="SampleUwp.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:SampleUwp"
+    xmlns:sampleUwp="using:SampleUwp"
     RequestedTheme="Light">
+    
+    <Application.Resources>
+        <ResourceDictionary>
+            <sampleUwp:ViewModelLocator x:Key="Locator"/>
+        </ResourceDictionary>
+    </Application.Resources>
 
 </Application>

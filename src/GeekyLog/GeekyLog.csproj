@@ -35,6 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Base\BaseEventInfo.cs" />
+    <Compile Include="Base\BaseEventListener.cs" />
     <Compile Include="Base\BaseEventSource.cs" />
     <Compile Include="Base\HttpBaseConfiguration.cs" />
     <Compile Include="Base\SqliteBaseConfiguration.cs" />
