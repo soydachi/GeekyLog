@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 
 namespace GeekyLog.Listeners
 {
-    public sealed class StorageFileEventListener : EventListener
+    public sealed class StorageFileEventListener<TBaseEventInfo> : EventListener where TBaseEventInfo : BaseEventInfo
     {
         private readonly ISerializeListener serializeListener;
         private StorageFile storageFile;
@@ -64,12 +64,12 @@ namespace GeekyLog.Listeners
 
             var lines = new List<string>();
 
-            var model = serializeListener.Deserialize<StorageFileEventInfo>(eventData.Payload[0].ToString());
+            var model = serializeListener.Deserialize<TBaseEventInfo>(eventData.Payload[0].ToString());
             model.Level = eventData.Level;
 
             var builder = new StringBuilder();
             builder.AppendLine(
-                $"{model.TimeStamp}\tEventLevel: {eventData.Level}\tMessage: {model.Message}\tCategory: {model.Category}");
+                $"{model.TimeStamp}\tEventLevel: {eventData.Level}\tMessage: {model.Message}");
             builder.AppendLine($"{model.TimeStamp}\tErrorPath: {model.ErrorPath}");
 
             if (model.ExceptionName != null)

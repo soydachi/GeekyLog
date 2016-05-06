@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Diagnostics.Tracing;
 using System.Threading;
+using System.Threading.Tasks;
 using GeekyLog.Annotations;
 using GeekyLog.Base;
 using GeekyLog.Interfaces;
@@ -10,7 +11,7 @@ using SQLite.Net;
 
 namespace GeekyLog.Listeners
 {
-    public sealed class SqliteEventListener : EventListener
+    public sealed class SqliteEventListener<TBaseEventInfo> : EventListener where TBaseEventInfo : BaseEventInfo
     {
         private readonly SemaphoreSlim semaphoreSlim;
         private readonly ISerializeListener serializeListener;
@@ -27,10 +28,13 @@ namespace GeekyLog.Listeners
 
             Debug.WriteLine("SqliteEventListener for {0} has name {1}", GetHashCode(), name);
 
-            using (conn = new SQLiteConnection(sqliteConfiguration.SQLitePlatform, sqliteConfiguration.Path,
-                        storeDateTimeAsTicks: false))
+            using (conn = new SQLiteConnection(sqliteConfiguration.SQLitePlatform, sqliteConfiguration.Path, 
+                storeDateTimeAsTicks: false))
             {
-                conn.CreateTable<SqliteEventInfo>();
+#if DEBUG
+                conn.TraceListener = new DebugTraceListener();
+#endif
+                conn.CreateTable<TBaseEventInfo>();
             }
         }
 
@@ -40,7 +44,7 @@ namespace GeekyLog.Listeners
 
             try
             {
-                var model = serializeListener.Deserialize<SqliteEventInfo>(eventData.Payload[0].ToString());
+                var model = serializeListener.Deserialize<TBaseEventInfo>(eventData.Payload[0].ToString());
                 model.Level = eventData.Level;
 
                 using (var conn = new SQLiteConnection(sqliteConfiguration.SQLitePlatform, sqliteConfiguration.Path,
@@ -65,4 +69,14 @@ namespace GeekyLog.Listeners
                 eventSource.Name);
         }
     }
+
+#if DEBUG
+    public class DebugTraceListener : ITraceListener
+    {
+        public void Receive(string message)
+        {
+            Debug.WriteLine(message);
+        }
+    }
+#endif
 }
