@@ -17,9 +17,7 @@ namespace GeekyLog.Interfaces
         {
             internalSerializationSettings = new JsonSerializerSettings()
             {
-                DateFormatHandling = DateFormatHandling.MicrosoftDateFormat,
-                Culture = CultureInfo.InvariantCulture,
-                DateFormatString = "0:yyyy-MM-dd HH\\:mm\\:ss\\:ffff"
+                DateFormatString = CultureInfo.CurrentCulture.DateTimeFormat.FullDateTimePattern
             };
 
             if (serializationSettings != null)

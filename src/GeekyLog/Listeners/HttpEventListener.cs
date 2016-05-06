@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 
 namespace GeekyLog.Listeners
 {
-    public sealed class HttpEventListener : EventListener
+    public sealed class HttpEventListener<TBaseEventInfo> : EventListener where TBaseEventInfo : BaseEventInfo
     {
         private readonly SemaphoreSlim semaphoreSlim;
         private readonly ISerializeListener serializeListener;
@@ -38,7 +38,7 @@ namespace GeekyLog.Listeners
 
             try
             {
-                var model = serializeListener.Deserialize<BaseEventInfo>(eventData.Payload[0].ToString());
+                var model = serializeListener.Deserialize<TBaseEventInfo>(eventData.Payload[0].ToString());
                 model.Level = eventData.Level;
                 var json = serializeListener.Serialize(model);
 

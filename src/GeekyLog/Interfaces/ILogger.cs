@@ -27,8 +27,13 @@ namespace GeekyLog.Interfaces
             serializeListener = new SerializeListener(serializerSettings);
         }
 
+        public static void ConfigureFactoryFor<TBaseEventInfo>() where TBaseEventInfo : BaseEventInfo, new()
+        {
+            Factory = new LogFactory<TBaseEventInfo>();
+        }
+
         public static ILogger Log = new Logger();
-        public static LogFactory Factory = new LogFactory();
+        public static ILogBuilder<BaseEventInfo> Factory;
         
         public void Debug(BaseEventInfo message)
         {

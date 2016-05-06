@@ -7,43 +7,42 @@ using GeekyLog.Interfaces;
 
 namespace GeekyLog
 {
-    public class LogFactory : LogBuilder
+    public class LogFactory<TBaseEventInfo> : ILogBuilder<TBaseEventInfo> where TBaseEventInfo : BaseEventInfo, new()
     {
-        private BaseEventInfo model;
+        private TBaseEventInfo model;
 
-        public override LogFactory CreateInfo([NotNull] string message, [NotNull] object category,
+        public ILogBuilder<TBaseEventInfo> CreateInfo([NotNull] string message,
             [CallerFilePath, CanBeNull] string path = null, [CallerMemberName, CanBeNull] string methodName = null)
         {
-            model = new BaseEventInfo();
+            model = new TBaseEventInfo();
             model.Message = message;
-            model.Category = category;
             model.ErrorPath = $"{path.Split('\\').Last().Split('.').First()}.{methodName}()";
             return this;
         }
 
-        public override LogFactory SetException([NotNull] Exception exception)
+        public ILogBuilder<TBaseEventInfo> SetException([NotNull] Exception exception)
         {
             model.ExceptionName = exception.GetType().Name;
             model.StackTrace = $"{exception.Message}\r\n{exception.StackTrace}";
             return this;
         }
 
-        public override LogFactory SetBackStack([CanBeNull] string backStack)
+        public ILogBuilder<TBaseEventInfo> SetBackStack([CanBeNull] string backStack)
         {
             model.BackStack = backStack;
             return this;
         }
 
-        public override BaseEventInfo Build()
+        public TBaseEventInfo Build()
         {
             return model;
         }
 
-        public BaseEventInfo Build([NotNull] string message, [NotNull] object category, [NotNull] Exception exception,
+        public BaseEventInfo Build([NotNull] string message, [NotNull] Exception exception,
             [CanBeNull] string backStack = null, [CallerFilePath, CanBeNull] string path = null,
             [CallerMemberName, CanBeNull] string methodName = null)
         {
-            return Logger.Factory.CreateInfo(message, category)
+            return Logger.Factory.CreateInfo(message)
                 .SetException(exception)
                 .SetBackStack(backStack)
                 .Build();

@@ -43,7 +43,7 @@
     <Compile Include="Interfaces\ISerializeListener.cs" />
     <Compile Include="Listeners\SqliteEventListener.cs" />
     <Compile Include="Listeners\HttpEventListener.cs" />
-    <Compile Include="LogBuilder.cs" />
+    <Compile Include="ILogBuilder.cs" />
     <Compile Include="LogFactory.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
