@@ -1,9 +1,16 @@
 ﻿using System;
+using System.Diagnostics.Tracing;
+using System.IO;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using GeekyLog.Base;
+using GeekyLog.Interfaces;
+using GeekyLog.Listeners;
+using SQLite.Net.Platform.WinRT;
 
 namespace SampleUwp
 {
@@ -29,12 +36,6 @@ namespace SampleUwp
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-#if DEBUG
-            if (System.Diagnostics.Debugger.IsAttached)
-            {
-                this.DebugSettings.EnableFrameRateCounter = true;
-            }
-#endif
             Frame rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
@@ -43,8 +44,20 @@ namespace SampleUwp
             {
                 // Create a Frame to act as the navigation context and navigate to the first page
                 rootFrame = new Frame();
-
                 rootFrame.NavigationFailed += OnNavigationFailed;
+
+                // GeekyLog Configuration
+                var name = "SampleUwpLogger";
+                var path = Path.Combine(ApplicationData.Current.LocalFolder.Path, name);
+                Logger.ConfigureFactoryFor<BaseEventInfo>();
+                Logger.ConfigureListener(new StorageFileEventListener<BaseEventInfo>(name),
+                    EventLevel.Informational | EventLevel.Error);
+                Logger.ConfigureListener(new SqliteEventListener<BaseEventInfo>(name, new SqliteBaseConfiguration
+                {
+                    Path = path,
+                    SQLitePlatform = new SQLitePlatformWinRT()
+                }), EventLevel.Error);
+                // ---
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {

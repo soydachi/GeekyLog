@@ -9,6 +9,5 @@ namespace SampleUwp.ViewModels
             
         }
 
-
     }
 }
