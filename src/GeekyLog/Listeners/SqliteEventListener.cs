@@ -11,13 +11,12 @@ using SQLite.Net;
 
 namespace GeekyLog.Listeners
 {
-    public sealed class SqliteEventListener<TBaseEventInfo> : EventListener where TBaseEventInfo : BaseEventInfo
+    public class SqliteEventListener<TBaseEventInfo> : EventListener where TBaseEventInfo : BaseEventInfo
     {
-        private readonly SemaphoreSlim semaphoreSlim;
-        private readonly ISerializeListener serializeListener;
-        private readonly SqliteBaseConfiguration sqliteConfiguration;
-        private SQLiteConnection conn;
-        private readonly string name;
+        protected readonly SemaphoreSlim semaphoreSlim;
+        protected readonly ISerializeListener serializeListener;
+        protected readonly SqliteBaseConfiguration sqliteConfiguration;
+        protected readonly string name;
 
         public SqliteEventListener([NotNull] string name, [NotNull] SqliteBaseConfiguration sqliteConfiguration, [CanBeNull] JsonSerializerSettings serializerSettings = null)
         {
@@ -28,8 +27,13 @@ namespace GeekyLog.Listeners
 
             Debug.WriteLine("SqliteEventListener for {0} has name {1}", GetHashCode(), name);
 
-            using (conn = new SQLiteConnection(sqliteConfiguration.SQLitePlatform, sqliteConfiguration.Path, 
-                storeDateTimeAsTicks: false))
+            CreateDatabaseTables(sqliteConfiguration);
+        }
+
+        protected virtual void CreateDatabaseTables(SqliteBaseConfiguration sqliteConfiguration)
+        {
+            using (var conn = new SQLiteConnection(sqliteConfiguration.SQLitePlatform, sqliteConfiguration.Path,
+                storeDateTimeAsTicks: true))
             {
 #if DEBUG
                 conn.TraceListener = new DebugTraceListener();
@@ -48,7 +52,7 @@ namespace GeekyLog.Listeners
                 model.Level = eventData.Level;
 
                 using (var conn = new SQLiteConnection(sqliteConfiguration.SQLitePlatform, sqliteConfiguration.Path,
-                        storeDateTimeAsTicks: false))
+                        storeDateTimeAsTicks: true))
                 {
                     conn.Insert(model);
                 }
