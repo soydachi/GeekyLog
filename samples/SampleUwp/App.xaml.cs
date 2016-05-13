@@ -54,7 +54,7 @@ namespace SampleUwp
                     EventLevel.Informational | EventLevel.Error);
                 Logger.ConfigureListener(new SqliteEventListener<BaseEventInfo>(name, new SqliteBaseConfiguration
                 {
-                    Path = path,
+                    Path = $"{path}.db",
                     SQLitePlatform = new SQLitePlatformWinRT()
                 }), EventLevel.Error);
                 // ---

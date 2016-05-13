@@ -1,3 +1,5 @@
+using System.Diagnostics.Tracing;
+
 namespace SampleUwp.Views
 {
     /// <summary>

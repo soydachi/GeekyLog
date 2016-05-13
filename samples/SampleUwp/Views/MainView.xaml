@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:base="using:GeekyTool.Base"
+    xmlns:tracing="using:System.Diagnostics.Tracing"
     DataContext="{Binding Source={StaticResource Locator}, Path=MainViewModel}"
     mc:Ignorable="d">
 
@@ -14,14 +15,35 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Rectangle Margin="0,0,0,0" Fill="#FF202D3A"/>
-        <TextBlock Grid.Row="0" TextWrapping="Wrap" Text="Sample UWP" Style="{StaticResource HeaderTextBlockStyle}" FontWeight="Bold" Foreground="#FF3498DB" Margin="12" VerticalAlignment="Center"/>
+        <TextBlock Grid.Row="0" TextWrapping="Wrap" Text="Sample UWP" Style="{StaticResource HeaderTextBlockStyle}" FontWeight="Bold" Foreground="WhiteSmoke" Margin="12" VerticalAlignment="Center"/>
         <StackPanel Grid.Row="1" Margin="12,30,12,0" >
-            <Button Content="Button" Style="{StaticResource ButtonSampleUwpStyle}"/>
-            <Button Content="Button" Style="{StaticResource ButtonSampleUwpStyle}"/>
-            <Button Content="Button" Style="{StaticResource ButtonSampleUwpStyle}"/>
-            <Button Content="Button" Style="{StaticResource ButtonSampleUwpStyle}"/>
-            <Button Content="Button" Style="{StaticResource ButtonSampleUwpStyle}"/>
-            <Button Content="Button" Style="{StaticResource ButtonSampleUwpStyle}"/>
+            <Button Command="{Binding RaiseException}" Content="Raise Debug Exception" Style="{StaticResource ButtonSampleUwpStyle}">
+                <Button.CommandParameter>
+                    <tracing:EventLevel>Verbose</tracing:EventLevel>
+                </Button.CommandParameter>
+            </Button>
+            <Button Command="{Binding RaiseException}" Content="Raise Info Exception" Style="{StaticResource ButtonSampleUwpStyle}">
+                <Button.CommandParameter>
+                    <tracing:EventLevel>Informational</tracing:EventLevel>
+                </Button.CommandParameter>
+            </Button>
+            <Button Command="{Binding RaiseException}" Content="Raise Warn Exception" Style="{StaticResource ButtonSampleUwpStyle}">
+                <Button.CommandParameter>
+                    <tracing:EventLevel>Warning</tracing:EventLevel>
+                </Button.CommandParameter>
+            </Button>
+            <Button Command="{Binding RaiseException}" Content="Raise Error Exception" Style="{StaticResource ButtonSampleUwpStyle}">
+                <Button.CommandParameter>
+                    <tracing:EventLevel>Error</tracing:EventLevel>
+                </Button.CommandParameter>
+            </Button>
+            <Button Command="{Binding RaiseException}" Content="Raise Critical Exception" Style="{StaticResource ButtonSampleUwpStyle}">
+                <Button.CommandParameter>
+                    <tracing:EventLevel>Critical</tracing:EventLevel>
+                </Button.CommandParameter>
+            </Button>
+            <TextBlock Text="All the errors are located in the ApplicationData.Current.LocalFolder. There will be all the diferent configuration that we made in App.xaml.cs"
+                       TextWrapping="Wrap" FontWeight="Bold" Foreground="WhiteSmoke" Margin="0,8,0,0"></TextBlock>
         </StackPanel>
     </Grid>
 </base:PageBase>
