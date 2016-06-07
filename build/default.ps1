@@ -59,7 +59,7 @@ task Setup -description "Setup environment" {
     $script:version = $version
   }
   
-  Exec { .$nuget restore $packagesConfig "$sourceDir\GeekyLog.sln" } "Error pre-installing NuGet packages"
+  Exec { .$nuget restore $packagesConfig "$sourceDir\GeekyLog.Release.sln" } "Error pre-installing NuGet packages"
 }
 
 task Headers -description "Updates the headers in *.cs files" {
@@ -136,7 +136,7 @@ task Build -depends Clean, Setup, Version -description "Build all projects and g
   New-Item -Path $binariesDir -ItemType Directory | Out-Null
   New-Item -Path $tempBinariesDir -ItemType Directory | Out-Null
   
-  Exec { msbuild "/t:Clean;Build" /p:Configuration=Release "/p:OutDir=$tempBinariesDir" /p:GenerateProjectSpecificOutputFolder=true /p:StyleCopTreatErrorsAsWarnings=true /m "$sourceDir\GeekyLog.sln" } "Error building $solutionFile"
+  Exec { msbuild "/t:Clean;Build" /p:Configuration=Release "/p:OutDir=$tempBinariesDir" /p:GenerateProjectSpecificOutputFolder=true /p:StyleCopTreatErrorsAsWarnings=true /m "$sourceDir\GeekyLog.Release.sln" } "Error building $solutionFile"
   
   $projects | % {
     $projectName = $_.Name

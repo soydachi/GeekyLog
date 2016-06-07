@@ -3,9 +3,12 @@
 
 [**GeekyLog**](https://github.com/dachibox/GeekyLog) A simple, toolkit agnostic logger component from GeekyTool suite.
 
-## Install GeekyLog using NuGet
+## Install GeekyLog using NuGet [![Build status](https://ci.appveyor.com/api/projects/status/yndofq7dtyrdn4r9?svg=true)](https://ci.appveyor.com/project/Dachi/geekylog)
 
-Comming soon...
+Package             | State | Description
+--------------------|-------|--------------------------------------
+[GeekyLog.Core][1] | ![Latest GeekyLog.Core stable version][3] | The portable logger.
+[GeekyLog][2]      | ![Latest GeekyLog stable version][4] | Universal Windows Platform extension for GeekyLog.Core
 
 
 ## Documentation
@@ -54,3 +57,8 @@ You can find all the UWP code examples *(comming soon..)*
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
+
+[1]: https://www.nuget.org/packages/GeekyLog.Core
+[2]: https://www.nuget.org/packages/GeekyLog
+[3]: https://img.shields.io/nuget/v/GeekyLog.Core.svg?style=flat-square "Latest GeekyLog.Core stable version"
+[4]: https://img.shields.io/nuget/v/GeekyLog.svg?style=flat-square "Latest GeekyLog stable version"
