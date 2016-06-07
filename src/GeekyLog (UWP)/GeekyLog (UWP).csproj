@@ -112,9 +112,9 @@
     <EmbeddedResource Include="Properties\GeekyLog__UWP_.rd.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GeekyLog\GeekyLog.csproj">
-      <Project>{0AFFC584-576A-4C6A-928D-E21D3D547F55}</Project>
-      <Name>GeekyLog</Name>
+    <ProjectReference Include="..\GeekyLog.Core\GeekyLog.Core.csproj">
+      <Project>{0affc584-576a-4c6a-928d-e21d3d547f55}</Project>
+      <Name>GeekyLog.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

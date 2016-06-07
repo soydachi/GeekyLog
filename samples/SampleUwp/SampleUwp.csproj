@@ -138,10 +138,6 @@
       <Project>{9e422cf9-63f3-43c4-a029-f4f918b1e592}</Project>
       <Name>GeekyLog %28UWP%29</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\GeekyLog\GeekyLog.csproj">
-      <Project>{0affc584-576a-4c6a-928d-e21d3d547f55}</Project>
-      <Name>GeekyLog</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <SDKReference Include="Microsoft.VCLibs, Version=14.0">
