@@ -29,7 +29,7 @@ properties {
   
   $projects = @(
     @{Name = "GeekyLog"; Configurations = @("UWP")},
-    @{Name = "GeekyLog"; Configurations = @("Portable")}
+    @{Name = "GeekyLog.Core"; Configurations = @("Portable")}
   )
 }
 
