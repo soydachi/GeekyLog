@@ -23,7 +23,7 @@ namespace GeekyLog
         public ILogBuilder<TBaseEventInfo> SetException([NotNull] Exception exception)
         {
             model.ExceptionName = exception.GetType().Name;
-            model.StackTrace = $"{exception.Message}\r\n{exception.StackTrace}";
+            model.StackTrace = $"{exception.Message}\r\n{exception.InnerException?.Message}\r\n{exception.StackTrace}";
             return this;
         }
 
